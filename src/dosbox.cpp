@@ -480,7 +480,7 @@ void DOSBOX_Init(void) {
 	
 	const char* mputypes[] = { "intelligent", "uart", "none",0};
 	// FIXME: add some way to offer the actually available choices.
-	const char *devices[] = { "default", "win32", "alsa", "oss", "coreaudio", "coremidi","none", 0};
+	const char *devices[] = { "default", "win32", "alsa", "oss", "fluidsynth", "coreaudio", "coremidi","none", 0};
 	Pstring = secprop->Add_string("mpu401",Property::Changeable::WhenIdle,"intelligent");
 	Pstring->Set_values(mputypes);
 	Pstring->Set_help("Type of MPU-401 to emulate.");
@@ -491,7 +491,7 @@ void DOSBOX_Init(void) {
 
 	Pstring = secprop->Add_string("midiconfig",Property::Changeable::WhenIdle,"");
 	Pstring->Set_help("Special configuration options for the device driver. This is usually the id of the device you want to use.\n"
-	                  "  or in the case of coreaudio, you can specify a soundfont here.\n"
+	                  "  or in the case of coreaudio or fluidsynth, you can specify a soundfont here.\n"
 	                  "  When using a Roland MT-32 rev. 0 as midi output device, some games may require a delay in order to prevent 'buffer overflow' issues.\n"
 	                  "  In that case, add 'delaysysex', for example: midiconfig=2 delaysysex\n"
 	                  "  See the README/Manual for more details.");
