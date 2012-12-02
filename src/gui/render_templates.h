@@ -431,6 +431,17 @@ static void conc3d(Cache,SBPP,DBPP) (const void * s) {
 #undef SCALERHEIGHT
 #undef SCALERFUNC
 
+#define SCALERNAME		HQ4x
+#define SCALERWIDTH		4
+#define SCALERHEIGHT	4
+#include "render_templates_hq4x.h"
+#define SCALERFUNC		conc2d(Hq4x,SBPP)(line0, line1, line2, line3, fc);
+#include "render_loops.h"
+#undef SCALERNAME
+#undef SCALERWIDTH
+#undef SCALERHEIGHT
+#undef SCALERFUNC
+
 #include "render_templates_sai.h"
 
 #define SCALERNAME		Super2xSaI

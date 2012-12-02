@@ -125,6 +125,7 @@ extern ScalerSimpleBlock_t ScaleScan3x;
 #if RENDER_USE_ADVANCED_SCALERS>2
 extern ScalerComplexBlock_t ScaleHQ2x;
 extern ScalerComplexBlock_t ScaleHQ3x;
+extern ScalerComplexBlock_t ScaleHQ4x;
 extern ScalerComplexBlock_t Scale2xSaI;
 extern ScalerComplexBlock_t ScaleSuper2xSaI;
 extern ScalerComplexBlock_t ScaleSuperEagle;

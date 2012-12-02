@@ -397,6 +397,14 @@ ScalerComplexBlock_t ScaleHQ3x ={
 {	0,HQ3x_16_R,HQ3x_16_R,HQ3x_32_R}
 };
 
+ScalerComplexBlock_t ScaleHQ4x ={
+	"HQ4x",
+	GFX_CAN_15|GFX_CAN_16|GFX_CAN_32|GFX_RGBONLY,
+	4,4,
+{	0,HQ4x_16_L,HQ4x_16_L,HQ4x_32_L},
+{	0,HQ4x_16_R,HQ4x_16_R,HQ4x_32_R}
+};
+
 ScalerComplexBlock_t ScaleSuper2xSaI ={
 	"Super2xSaI",
 	GFX_CAN_15|GFX_CAN_16|GFX_CAN_32|GFX_RGBONLY,

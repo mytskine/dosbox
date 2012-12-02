@@ -388,7 +388,7 @@ void DOSBOX_Init(void) {
 	const char *scalers[] = { 
 		"none", "normal2x", "normal3x",
 #if RENDER_USE_ADVANCED_SCALERS>2
-		"advmame2x", "advmame3x", "advinterp2x", "advinterp3x", "hq2x", "hq3x", "2xsai", "super2xsai", "supereagle",
+		"advmame2x", "advmame3x", "advinterp2x", "advinterp3x", "hq2x", "hq3x", "hq4x", "2xsai", "super2xsai", "supereagle",
 #endif
 #if RENDER_USE_ADVANCED_SCALERS>0
 		"tv2x", "tv3x", "rgb2x", "rgb3x", "scan2x", "scan3x",

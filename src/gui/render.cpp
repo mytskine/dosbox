@@ -310,6 +310,8 @@ static void RENDER_Reset( void ) {
 				complexBlock = &ScaleHQ2x;
 			else if (render.scale.size == 3)
 				complexBlock = &ScaleHQ3x;
+			else if (render.scale.size == 4)
+				complexBlock = &ScaleHQ4x;
 			break;
 		case scalerOpSuperSaI:
 			if (render.scale.size == 2)
@@ -603,6 +605,7 @@ void RENDER_Init(Section * sec) {
 	else if (scaler == "advinterp3x") { render.scale.op = scalerOpAdvInterp;render.scale.size = 3; }
 	else if (scaler == "hq2x") { render.scale.op = scalerOpHQ;render.scale.size = 2; }
 	else if (scaler == "hq3x") { render.scale.op = scalerOpHQ;render.scale.size = 3; }
+	else if (scaler == "hq4x") { render.scale.op = scalerOpHQ;render.scale.size = 4; }
 	else if (scaler == "2xsai") { render.scale.op = scalerOpSaI;render.scale.size = 2; }
 	else if (scaler == "super2xsai") { render.scale.op = scalerOpSuperSaI;render.scale.size = 2; }
 	else if (scaler == "supereagle") { render.scale.op = scalerOpSuperEagle;render.scale.size = 2; }
