@@ -65,6 +65,8 @@ public:
 	}
 
 	bool Open(const char *conf) {
+		Section_prop *section = static_cast<Section_prop *>(control->GetSection("midi"));
+
 		MT32Emu::SynthProperties tmpProp = {0};
 		tmpProp.sampleRate = 32000;
 
@@ -76,6 +78,9 @@ public:
 		tmpProp.userData = this;
 		tmpProp.printDebug = printDebug;
 		tmpProp.report = &report;
+		if (strlen(section->Get_string("midiconfig")) > 0) {
+			tmpProp.baseDir = section->Get_string("midiconfig");
+		}
 
 		synth = new MT32Emu::Synth();
 		if (!synth->open(tmpProp)) {
@@ -83,7 +88,6 @@ public:
 			return false;
 		}
 
-		Section_prop *section = static_cast<Section_prop *>(control->GetSection("midi"));
 		if (strcmp(section->Get_string("mt32.reverb.mode"), "auto") != 0) {
 			Bit8u reverbsysex[] = {0x10, 0x00, 0x01, 0x00, 0x05, 0x03};
 			reverbsysex[3] = (Bit8u)atoi(section->Get_string("mt32.reverb.mode"));
