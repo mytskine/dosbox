@@ -195,6 +195,19 @@ if test x$fluid_midi = xtrue ; then
   CXXFLAGS="$CXXFLAGS $FLUID_CFLAGS"
 fi
 
+dnl enable disable munt and pass its cflags to CXXFLAGS
+AC_ARG_ENABLE(mt32-munt,
+AC_HELP_STRING([--enable-mt32-munt],[compile with munt mt32 emulator (default yes)]),
+[ case "${enableval}" in
+ yes) mt32_munt=true;;
+ no)  mt32_munt=false;;
+esac],
+[mt32_munt=true])
+if test x$mt32_munt = xtrue ; then
+  AM_PATH_MUNT(1.1.2, AC_DEFINE(HAVE_MUNT,1,[Define to 1 to use Munt for MT32 emulation]) , : )
+  CXXFLAGS="$CXXFLAGS $MUNT_CFLAGS"
+fi
+
 #Check for big endian machine, should #define WORDS_BIGENDIAN if so
 AC_C_BIGENDIAN
 

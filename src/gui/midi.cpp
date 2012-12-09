@@ -109,6 +109,12 @@ MidiHandler Midi_none;
 
 #endif
 
+#if defined (HAVE_MUNT)
+
+#include "midi_mt32.h"
+
+#endif
+
 static struct {
 	Bitu status;
 	Bitu cmd_len;

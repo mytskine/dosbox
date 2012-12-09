@@ -423,6 +423,92 @@ AC_SUBST(FLUID_CFLAGS)
 AC_SUBST(FLUID_LIBS)
 ])
 
+dnl Configure Paths for munt (mt32 emulator)
+dnl Test for libmunt, and define MUNT_CFLAGS and MUNT_LIBS as
+dnl appropriate.
+dnl AM_PATH_MUNT([MINIMUM-VERSION [, ACTION-IF-FOUND [, ACTION-IF-NOT-FOUND]]])
+dnl enables arguments --with-munt-prefix=
+dnl                   --with-munt-inc-prefix=
+dnl
+dnl For backwards compatibility, if ACTION_IF_NOT_FOUND is not specified,
+dnl and the Munt libraries are not found, a fatal AC_MSG_ERROR() will
+dnl result.
+dnl
+AC_DEFUN([AM_PATH_MUNT],
+[dnl Save the original CFLAGS, LDFLAGS, and LIBS
+munt_save_CFLAGS="$CFLAGS"
+munt_save_LDFLAGS="$LDFLAGS"
+munt_save_LIBS="$LIBS"
+munt_found=yes
+
+dnl
+dnl Get the cflags and libraries for munt
+dnl
+AC_ARG_WITH(munt-prefix,
+[  --with-munt-prefix=PFX  Prefix where munt library is installed (optional)],
+[munt_prefix="$withval"], [munt_prefix=""])
+
+AC_ARG_WITH(munt-inc-prefix,
+[  --with-munt-inc-prefix=PFX  Prefix where include libraries are (optional)],
+[munt_inc_prefix="$withval"], [munt_inc_prefix=""])
+
+dnl Add any special include directories
+AC_MSG_CHECKING(for Munt CFLAGS)
+if test "$munt_inc_prefix" != "" ; then
+   MUNT_CFLAGS="$MUNT_CFLAGS -I$munt_inc_prefix"
+   CFLAGS="$CFLAGS -I$munt_inc_prefix"
+fi
+AC_MSG_RESULT($MUNT_CFLAGS)
+
+dnl add any special lib dirs
+AC_MSG_CHECKING(for Munt LDFLAGS)
+if test "$munt_prefix" != "" ; then
+   MUNT_LIBS="$MUNT_LIBS -L$munt_prefix"
+   LDFLAGS="$LDFLAGS $MUNT_LIBS"
+fi
+
+dnl add the munt library
+MUNT_LIBS="$MUNT_LIBS -lmt32emu"
+LIBS="$MUNT_LIBS $LIBS"
+AC_MSG_RESULT($MUNT_LIBS)
+
+dnl Check for a working version of libmunt
+AC_MSG_CHECKING(for libmunt headers)
+no_munt=""
+
+AC_LANG_PUSH(C++)
+AC_TRY_COMPILE([
+#include <mt32emu/mt32emu.h>
+], [
+
+],
+  [AC_MSG_RESULT(found.)
+   munt_found=yes],
+  [AC_MSG_RESULT(not present.)
+   munt_found=no]
+)
+AC_LANG_POP(C++)
+
+if test "x$munt_found" = "xyes" ; then
+   ifelse([$2], , :, [$2])
+   LIBS=`echo $LIBS | sed 's/-lmt32emu//g'`
+   LIBS=`echo $LIBS | sed 's/  //'`
+   LIBS="-lmt32emu $LIBS"
+fi
+if test "x$munt_found" = "xno" ; then
+   ifelse([$3], , :, [$3])
+   CFLAGS="$munt_save_CFLAGS"
+   LDFLAGS="$munt_save_LDFLAGS"
+   LIBS="$munt_save_LIBS"
+   MUNT_CFLAGS=""
+   MUNT_LIBS=""
+fi
+
+dnl That should be it.  Now just export out symbols:
+AC_SUBST(MUNT_CFLAGS)
+AC_SUBST(MUNT_LIBS)
+])
+
 AH_TOP([
 /*
  *  Copyright (C) 2002-2011  The DOSBox Team
