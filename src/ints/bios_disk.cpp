@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2002-2011  The DOSBox Team
+ *  Copyright (C) 2002-2013  The DOSBox Team
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -20,6 +20,7 @@
 #include "dosbox.h"
 #include "callback.h"
 #include "bios.h"
+#include "bios_disk.h"
 #include "regs.h"
 #include "mem.h"
 #include "dos_inc.h" /* for Drives[] */

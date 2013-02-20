@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2002-2011  The DOSBox Team
+ *  Copyright (C) 2002-2013  The DOSBox Team
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -274,6 +274,8 @@ void DBGUI_StartUp(void) {
 	nodelay(dbg.win_main,true);
 	keypad(dbg.win_main,true);
 	#ifndef WIN32
+	printf("\e[8;50;80t");
+	fflush(NULL);
 	resizeterm(50,80);
 	touchwin(dbg.win_main);
 	#endif
